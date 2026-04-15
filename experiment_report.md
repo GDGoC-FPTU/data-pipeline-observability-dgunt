@@ -1,35 +1,36 @@
 # Experiment Report: Data Quality Impact on AI Agent
 
-**Student ID:** AI20K-XXXX
-**Name:** (Dien ten cua ban)
-**Date:** (Dien ngay thuc hien)
+**Student ID:** 2A202600459  
+**Name:** Vũ Đức Minh  
+**Date:** 2026-04-15  
 
 ---
 
-## 1. Ket qua thi nghiem
+## 1. Kết quả thí nghiệm
 
-Chay `agent_simulation.py` voi 2 bo du lieu va ghi lai ket qua:
+Chạy `agent_simulation.py` với 2 bộ dữ liệu và ghi lại kết quả:
 
 | Scenario | Agent Response | Accuracy (1-10) | Notes |
 |----------|----------------|-----------------|-------|
-| Clean Data (`processed_data.csv`) | (Ghi cau tra loi cua Agent) | | |
-| Garbage Data (`garbage_data.csv`) | (Ghi cau tra loi cua Agent) | | |
+| Clean Data (`processed_data.csv`) | Agent: Based on my data, the best choice is Laptop at $1200. | 9 | Dữ liệu hợp lệ, giá hợp lý, agent đưa ra kết quả chính xác |
+| Garbage Data (`garbage_data.csv`) | Agent: Based on my data, the best choice is Nuclear Reactor at $999999. | 2 | Dữ liệu bị nhiễu, giá trị bất thường, agent chọn sai hoàn toàn |
 
 ---
 
-## 2. Phan tich & nhan xet
+## 2. Phân tích & nhận xét
 
-### Tai sao Agent tra loi sai khi dung Garbage Data?
+### Tại sao Agent trả lời sai khi dùng Garbage Data?
 
-(Viet nhan xet cua ban o day — it nhat 50 tu)
+Agent AI phụ thuộc hoàn toàn vào dữ liệu đầu vào. Khi sử dụng Garbage Data, dữ liệu chứa nhiều vấn đề như giá trị bất thường (outliers), dữ liệu không hợp lệ, hoặc thông tin sai lệch. Trong trường hợp này, giá của "Nuclear Reactor" là $999999, vượt xa các sản phẩm khác, khiến agent ưu tiên chọn nó dù không hợp lý.
 
-(Hay phan tich cac van de nhu Duplicate IDs, wrong data types, outliers, null values
-va giai thich tai sao chung anh huong den ket qua cua Agent.)
+Ngoài ra, Garbage Data có thể chứa duplicate records, sai kiểu dữ liệu (ví dụ giá là string thay vì số), hoặc category không hợp lệ. Những lỗi này làm cho quá trình phân tích dữ liệu bị sai lệch, dẫn đến kết quả không đáng tin cậy.
+
+Việc thiếu bước validation và data cleaning sẽ khiến hệ thống AI đưa ra quyết định sai, dù model hoặc logic xử lý có đúng.
 
 ---
 
-## 3. Ket luan
+## 3. Kết luận
 
-**Quality Data > Quality Prompt?** (Dong y hay khong? Giai thich ngan gon.)
+**Quality Data > Quality Prompt?** → Đồng ý.
 
-(Viet ket luan cua ban o day)
+Dữ liệu chất lượng cao là yếu tố quan trọng nhất. Một prompt tốt không thể cứu được dữ liệu sai. Ngược lại, nếu dữ liệu sạch và đáng tin cậy, ngay cả một logic đơn giản cũng có thể đưa ra kết quả chính xác. Vì vậy, trong hệ thống AI, cần ưu tiên xây dựng pipeline xử lý và kiểm soát chất lượng dữ liệu trước khi tối ưu model hoặc prompt.
